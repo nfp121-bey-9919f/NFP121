@@ -7,6 +7,11 @@ package question3;
  * @author à compléter
  * @see java.lang.String, java.lang.Math
  */
+/**
+ * Import the Normalizer library to be able to use "Normalizer.normalize(String, Normalizer.Form.NFD);"
+ */
+import java.text.Normalizer;
+
 public class AuditeurCNAM {
     /** l'attribut nom de chaque auditeur. */
     private String nom;
@@ -14,6 +19,8 @@ public class AuditeurCNAM {
     private String prenom;
     /** l'attribut matricule de chaque auditeur. */
     private String matricule;
+    /** l'attribut login de chaque auditeur. */
+    private String login;
 
     /**
      * "Création", le constructeur d'un auditeur avec son nom, son prénom et son
@@ -45,7 +52,33 @@ public class AuditeurCNAM {
      *         homonymes...
      */
     public String login() {
-        return "";// à compléter
+        String nomX = nom;
+        String prenomX = prenom;
+        /**
+         * The Strings nomX et prenomX will be normalized according to the NFKD format
+         */
+        nomX = Normalizer.normalize(nomX, Normalizer.Form.NFKD);
+        prenomX = Normalizer.normalize(prenomX, Normalizer.Form.NFKD);
+        /**
+         * After normalization, we can apply a filter that drops all non-ASCII characters
+         */
+        nomX = nomX.replaceAll("[^\\p{ASCII}]", "");
+        prenomX = prenomX.replaceAll("[^\\p{ASCII}]", "");
+        /**
+         * Now we replace everything that is not an number, between a&z or between A&Z by "_"
+         */
+        nomX = nomX.replaceAll("[^a-zA-Z0-9]+","_");
+        prenomX = prenomX.replaceAll("[^a-zA-Z0-9]+","_");
+        
+        /**
+         * Converting all characters to lower case.
+         */
+             
+        String nomL = nomX.toLowerCase();
+        String prenomL = prenomX.toLowerCase();
+        
+        login = nomL.substring(0,Math.min(nomL.length(),6)) + "_" + prenomL.substring(0,1);
+        return login;
     }
 
     /**
@@ -54,7 +87,7 @@ public class AuditeurCNAM {
      * @return son nom
      */
     public String nom() {
-        return null;// à compléter
+         return this.nom;        
     }
 
     /**
@@ -63,7 +96,7 @@ public class AuditeurCNAM {
      * @return son prénom
      */
     public String prenom() {
-        return null;// à compléter
+        return this.prenom;
     }
 
     /**
@@ -72,7 +105,7 @@ public class AuditeurCNAM {
      * @return son matricule
      */
     public String matricule() {
-        return null;// à compléter
+        return this.matricule;
     }
 
     /**

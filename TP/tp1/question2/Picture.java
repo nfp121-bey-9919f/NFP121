@@ -19,7 +19,7 @@ public class Picture {
     private Square wall;
     private Square window;
     private Triangle roof;
-    private Circle sun;
+    private Circle sun, newSun;
 
     /**
      * Constructor for objects of class Picture
@@ -50,11 +50,19 @@ public class Picture {
         roof.makeVisible();
 
         sun = new Circle();
-        sun.changeColor("yellow");
+        sun.changeColor("blue");
         sun.moveHorizontal(180);
         sun.moveVertical(-10);
         sun.changeSize(60);
         sun.makeVisible();
+        
+        newSun = new Circle();
+        newSun.changeColor("yellow");
+        newSun.moveHorizontal(120);
+        newSun.moveVertical(-10);
+        newSun.changeSize(60);
+        newSun.makeVisible();
+        
     }
 
     /**
@@ -67,6 +75,7 @@ public class Picture {
             window.changeColor("white");
             roof.changeColor("black");
             sun.changeColor("black");
+            newSun.changeColor("black");
         }
     }
 
@@ -79,8 +88,17 @@ public class Picture {
             wall.changeColor("red");
             window.changeColor("black");
             roof.changeColor("green");
-            sun.changeColor("yellow");
+            sun.changeColor("blue");
+            newSun.changeColor("yellow");
         }
     }
-
+    
+    /**
+     * Si le soleil est deja bleu, on peut la faire coucher par appelant la methode slowMoveVertical definie dans la classe Circle.
+     */
+    public void coucherSoleil(){
+         if (sun != null && sun.getColor(sun) == "blue") {
+            sun.slowMoveVertical(250);
+        } 
+    }
 }

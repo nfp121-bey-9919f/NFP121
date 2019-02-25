@@ -167,4 +167,12 @@ public class Circle {
             canvas.erase(this);
         }
     }
+    
+        /**
+     * Get the color of the circle
+     */
+    public String getColor(Circle circle){
+        return circle.color;
+    }
+    
 }
