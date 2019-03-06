@@ -20,6 +20,7 @@ public class Picture {
     private Square window;
     private Triangle roof;
     private Circle sun, newSun;
+    private boolean terreFixe = true;
 
     /**
      * Constructor for objects of class Picture
@@ -97,7 +98,7 @@ public class Picture {
      * Si le soleil est deja bleu, on peut la faire coucher par appelant la methode slowMoveVertical definie dans la classe Circle.
      */
     public void coucherSoleil(){
-         if (sun != null && sun.getColor(sun) == "blue") {
+         if (sun != null && sun.getColor(sun) == "blue" && terreFixe == true) {
             sun.slowMoveVertical(250);
         } 
     }
